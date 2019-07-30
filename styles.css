@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Fascinate&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+body {
+    margin: 0;
+    background: #D1FAFF;
+    font-family: 'Roboto', sans-serif;
+    color: #062726;
+}
+
+header {
+    grid-row: 1;
+    grid-column: 1/-1;
+    background: #28AFB0;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 25% 50% 25%;
+    box-shadow: 0 0 5px 3px silver;
+}
+
+.container {
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    grid-template-rows: 5% 7.5% 80% 7.5%;
+    grid-gap: 10px 10px;
+}
+
+.title {
+    font-size: 1.75em;
+}
+
+.widget {
+    text-shadow: 0 0 1px #37392E
+}
+
+.userCorner {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10px;
+    grid-row: 1;
+    grid-column: 3;
+    grid-gap: 0;
+}
+
+.button {
+    border: none;
+    background: none;
+    display: inline-block;
+    color: white;
+    cursor: pointer;
+}
+
+#appName {
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3px;
+    font-family: 'Fascinate', cursive;
+    font-size: 30px;
+    color: #37392E;
+}
+
+#userLink {
+    grid-column: 1;
+    padding: 7px;
+    display: grid;
+    justify-self: center;
+}
+
+#logoutButton {
+    grid-column: 2;
+    padding: 7px;
+    display: grid;
+    justify-self: center;
+}
+
+#posts {
+    grid-row: 3;
+    grid-column: 2;
+    background: #9BD1E5;
+    padding: 1.5%;
+    box-shadow: 0 3px 4px 3px silver;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#widgets {
+    grid-row: 3;
+    grid-column: 3;
+    background: rgb(36, 137, 170);
+    box-shadow: 0 3px 4px 3px silver;
+    padding: 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+#themeImage {
+    grid-row: 3;
+    grid-column: 1;
+    background-image: url('https://timedotcom.files.wordpress.com/2017/03/manatee-endangered-species.jpeg');
+    background-position: 35% 45%;
+    background-size: 450%;
+    padding-left: 1%;
+    box-shadow: 0 3px 4px 3px silver;
+}
+
+#belowThemeDiv {
+    grid-row: 4;
+    grid-column: 1;
+    text-align: center;
+    padding-top: 5px;
+}
+
+#pageHeading {
+    grid-row: 2;
+    grid-column: 2;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#profilePicDiv {
+    grid-row: 2;
+    grid-column: 3;
+    background-position: 0 20%;
+    background-size: 100%;
+    background-image: url('https://www.jakks.com/img/products/nintendo/702190.jpg');
+}
