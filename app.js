@@ -3,6 +3,7 @@ const widgets = document.querySelector('#widgets')
 const taskForm = document.querySelector('#taskForm')
 const taskList = document.querySelector('#taskList')
 const postForm = document.querySelector('#postForm')
+const friendForm = document.querySelector('#friendForm')
 const postList = document.querySelector('#postList')
 const postDiv = document.querySelector('#posts')
 const profilePicDiv = document.querySelector('#profilePicDiv')
@@ -27,8 +28,7 @@ const postsUrl = 'http://localhost:3000/posts'
 const tasksUrl = 'http://localhost:3000/tasks'
 
 let userIndex = {}
-let currentUser = []
-console.log(currentUser)
+let currentUser = {}
 
 function logout() {
     currentUser = {}
@@ -66,6 +66,19 @@ taskForm.addEventListener('submit', event => {
     postTask(task)
     event.target.reset()
 })
+
+friendForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const friend = formData.get('friend')
+    displayFriend(friend)
+        // postFriend(friend)
+    event.target.reset()
+})
+
+// function postFriend(friend) {
+
+// }
 
 function displayTask(task) {
     const div = document.createElement('div')
@@ -107,6 +120,8 @@ postForm.addEventListener('submit', event => {
     let postAnon = formData.get('anon')
     if (postAnon == null) {
         postAnon = false
+    } else {
+        postAnon = true
     }
     const postObject = {
         user_id: currentUser.data.id,
@@ -240,13 +255,17 @@ function getFriends(id) {
     fetch(friendsUrl)
         .then(resp => resp.json())
         .then(friendArray => friendArray.map(
-            friend => displayFriends(friend.name)))
+            friend => displayFriend(friend.name)))
 }
 
-function displayFriends(name) {
+function displayFriend(name) {
     const div = document.createElement('div')
     const friend = document.createElement('p')
+    const trash = document.createElement('button')
+    trash.className = 'trash'
+    trash.innerText = 'Trash'
     friend.innerText = name
+    friend.appendChild(trash)
     div.appendChild(friend)
     friendList.appendChild(div)
 }
@@ -278,13 +297,13 @@ appName.addEventListener('click', event => {
     }
 })
 
-// // attempted splash/bash incrementer
-// posts.addEventListener('change', event => {
-//     console.log(event.target)
-//     if (event.target.type == 'checkbox') {
-
-//     }
-// })
+// splash/bash incrementer
+posts.addEventListener('click', event => {
+    console.log(event.target)
+    if (event.target.className == 'post-button') {
+        event.target.innerText++
+    }
+})
 
 userLink.addEventListener('click', event => {
     const array = [currentUser.data]
@@ -316,10 +335,10 @@ function displayPost(post) {
     styleContent(content, post)
 
     const splashes = document.createElement('span')
-    styleSplashes(splashes, post)
+    styleSplashes(splashes)
 
     const bashes = document.createElement('span')
-    styleBashes(bashes, post)
+    styleBashes(bashes)
 
     // const comment = document.createElement('p')
     // styleComment(comment, post)
@@ -331,10 +350,10 @@ function displayPost(post) {
     // styleCommentButton(commentButton)
 
     const splashButton = document.createElement('button')
-    styleSplashButton(splashButton)
+    styleSplashButton(splashButton, post)
 
     const bashButton = document.createElement('button')
-    styleBashButton(bashButton)
+    styleBashButton(bashButton, post)
 
     splashes.appendChild(splashButton)
     bashes.appendChild(bashButton)
@@ -358,12 +377,12 @@ function styleContent(content, post) {
     content.className = 'post-content'
 }
 
-function styleSplashes(splashes, post) {
-    splashes.innerText = post.splash
+function styleSplashes(splashes) {
+    splashes.innerText = 'Splash'
 }
 
-function styleBashes(bashes, post) {
-    bashes.innerText = post.crash
+function styleBashes(bashes) {
+    bashes.innerText = 'Bash'
 }
 
 // function styleComment(comment, post) {
@@ -381,12 +400,12 @@ function styleBashes(bashes, post) {
 //     commentButton.className = 'comment-button'
 // }
 
-function styleSplashButton(splashButton) {
-    splashButton.innerText = 'Splash'
+function styleSplashButton(splashButton, post) {
+    splashButton.innerText = post.splash
     splashButton.className = 'post-button'
 }
 
-function styleBashButton(bashButton) {
-    bashButton.innerText = 'Bash'
+function styleBashButton(bashButton, post) {
+    bashButton.innerText = post.crash
     bashButton.className = 'post-button'
 }
