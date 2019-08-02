@@ -33,6 +33,12 @@ form {
     justify-content: flex-start
 }
 
+ul {
+    padding-inline-start: 1rem;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
 .container {
     height: 100vh;
     margin: 0;
@@ -42,8 +48,12 @@ form {
     grid-gap: 10px 10px;
 }
 
-
-/* should be same as button */
+#profileInput {
+    font-family: 'Roboto', sans-serif;
+    border-image: none;
+    margin-left: 0.5rem;
+    width: auto;
+}
 
 input[type="submit"] {
     font-family: 'Roboto', sans-serif;
@@ -79,7 +89,7 @@ input[type="submit"] {
 
 .userCorner {
     display: grid;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: 20% 80%;
     grid-gap: 10px;
     grid-row: 1;
     grid-column: 3;
@@ -150,7 +160,6 @@ input[type="submit"] {
     grid-column: 2;
     display: flex;
     flex-direction: column;
-    align-content: flex-end;
 }
 
 .comment-content {
@@ -200,10 +209,9 @@ input[type="submit"] {
     overflow: scroll;
 }
 
-#toDoList {
-    padding-inline-start: 1rem;
-    margin-block-start: 0.5em;
-    margin-block-end: 0.5em;
+#taskList {
+    display: flex;
+    flex-direction: column-reverse;
 }
 
 #themeImage {

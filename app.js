@@ -1,7 +1,7 @@
 //work it
 const widgets = document.querySelector('#widgets')
-const toDoForm = document.querySelector('#toDoForm')
-const toDoList = document.querySelector('#toDoList')
+const taskForm = document.querySelector('#taskForm')
+const taskList = document.querySelector('#taskList')
 const postForm = document.querySelector('#postForm')
 const postList = document.querySelector('#postList')
 const postDiv = document.querySelector('#posts')
@@ -26,56 +26,110 @@ const usersUrl = 'http://localhost:3000/users'
 const postsUrl = 'http://localhost:3000/posts'
 const tasksUrl = 'http://localhost:3000/tasks'
 
-let currentUser = {}
+let userIndex = {}
+let currentUser = []
+console.log(currentUser)
+
+function logout() {
+    currentUser = {}
+    resetPage()
+}
+
+function resetPage() {
+    changeTheme('manatee')
+    pageHeading.innerText = 'Communitee Pool'
+    profilePicDiv.style.backgroundImage = "url('https://www.jakks.com/img/products/nintendo/702190.jpg')";
+    while (taskList.firstChild) {
+        taskList.removeChild(taskList.firstChild);
+    }
+    while (friendList.firstChild) {
+        friendList.removeChild(friendList.firstChild);
+    }
+    while (postList.firstChild) {
+        postList.removeChild(postList.firstChild);
+    }
+}
+
+function resetPageLite() {
+    pageHeading.innerText = 'Communitee Pool'
+    while (postList.firstChild) {
+        postList.removeChild(postList.firstChild);
+    }
+}
 
 // adding new tasks with trash option
-toDoForm.addEventListener('submit', event => {
-        event.preventDefault()
-        const formData = new FormData(event.target)
-        const listItem = formData.get('todo')
-        const li = document.createElement('li')
-        li.innerText = listItem
-        toDoList.appendChild(li)
-        const trash = document.createElement('button')
-        trash.className = 'trash'
-        trash.innerText = 'Trash'
-        li.appendChild(trash)
-        event.target.reset()
+taskForm.addEventListener('submit', event => {
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const task = formData.get('task')
+    displayTask(task)
+    postTask(task)
+    event.target.reset()
+})
+
+function displayTask(task) {
+    const div = document.createElement('div')
+    const p = document.createElement('p')
+    const trash = document.createElement('button')
+    p.innerText = task
+    trash.className = 'trash'
+    trash.innerText = 'Trash'
+    p.appendChild(trash)
+    div.appendChild(p)
+    taskList.appendChild(div)
+}
+
+function postTask(task) {
+    const taskObject = {
+        content: task,
+        user_id: currentUser.data.id
+    }
+    console.log(taskObject)
+    fetch(tasksUrl, {
+        method: 'POST',
+        body: JSON.stringify(taskObject),
+        headers: {
+            'Content-Type': 'application/json'
+        }
     })
-    // adds event delegation for trash class WIDGET
+}
+// adds event delegation for trash class WIDGET
 widgets.addEventListener('click', event => {
         if (event.target.className == 'trash') {
             event.target.parentNode.remove();
         }
     })
-    // add new post front end
+    // add new post front and back end
 postForm.addEventListener('submit', event => {
-        event.preventDefault()
-        const formData = new FormData(event.target)
-        const postItem = formData.get('postInput')
-        const p = document.createElement('p')
-        p.innerText = postItem
-        postList.appendChild(p)
-        const trash = document.createElement('button')
-        trash.className = 'trash'
-        trash.innerText = 'Trash'
-        p.appendChild(trash)
-        const splash = document.createElement('button')
-        splash.className = 'splash'
-        splash.innerText = 'Splash'
-        p.appendChild(splash)
-        const bash = document.createElement('button')
-        bash.className = 'bash'
-        bash.innerText = 'Bash'
-        p.appendChild(bash)
-        event.target.reset()
-    })
-    // add event delegation for trash buttons
-postDiv.addEventListener('click', event => {
-    if (event.target.className == 'trash') {
-        event.target.parentNode.remove();
+    event.preventDefault()
+    const formData = new FormData(event.target)
+    const postContent = formData.get('postInput')
+    let postAnon = formData.get('anon')
+    if (postAnon == null) {
+        postAnon = false
     }
+    const postObject = {
+        user_id: currentUser.data.id,
+        anon: postAnon,
+        crash: 0,
+        splash: 0,
+        content: postContent
+    }
+    console.log(postObject)
+    event.target.reset()
+    displayPost(postObject)
+    postThePost(postObject)
 })
+
+function postThePost(post) {
+    fetch(postsUrl, {
+        method: 'POST',
+        body: JSON.stringify(post),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
 
 const themes = {
     manatee: {
@@ -90,7 +144,8 @@ const themes = {
         boxShadow: '0 3px 4px 3px silver',
         postsBackground: '#9BD1E5',
         widgetColor: 'rgb(36, 137, 170)',
-        lineColor: '3px solid rgb(36, 137, 170)'
+        lineColor: '3px solid rgb(36, 137, 170)',
+        poolColor: '#D1FAFF'
     },
     otter: {
         url: "url('https://upload.wikimedia.org/wikipedia/commons/0/02/Sea_Otter_%28Enhydra_lutris%29_%2825169790524%29_crop.jpg')",
@@ -104,8 +159,8 @@ const themes = {
         boxShadow: '0 3px 4px 3px #A49966',
         postsBackground: 'rgb(240, 199, 133)',
         widgetColor: 'rgb(187, 141, 99)',
-        lineColor: '3px solid rgb(187, 141, 99)'
-
+        lineColor: '3px solid rgb(187, 141, 99)',
+        poolColor: '#DECBB7'
     },
     narwhal: {
         url: "url('https://www.abeautiful.world/wp-content/uploads/2016/03/xnarwhal-pictures.jpg')",
@@ -119,7 +174,8 @@ const themes = {
         boxShadow: '0 3px 4px 3px silver',
         postsBackground: '#BFCDE0',
         widgetColor: '#5D5D81',
-        lineColor: '3px solid #5D5D81'
+        lineColor: '3px solid #5D5D81',
+        poolColor: '#FEFCFD'
     }
 }
 
@@ -135,28 +191,31 @@ loginButton.addEventListener('click', event => {
 function findProfile(user) {
     fetch(usersUrl)
         .then(response => response.json())
+        .then(response => userIndex = response)
         .then(array => array.filter(profile => profile.name == user))
         .then(fetchProfileData)
 }
 
 function fetchProfileData(profile) {
+    console.log(profile)
     const id = profile[0].id
     const profileUrl = `http://localhost:3000/users/${id}`
     fetch(profileUrl)
         .then(resp => resp.json())
         .then(displayProfileData)
 }
-
+// profile is set
 function displayProfileData(profile) {
+    console.log(profile)
     currentUser = profile
-    console.log(currentUser)
     const attributes = profile.data.attributes
+    resetPage()
     setPageHeading(attributes.name)
     showProfilePicture(attributes.picture)
-    showUserPosts(profile.posts)
-    showUserTasks(profile.tasks)
+    showUserPosts(attributes.posts)
+    showUserTasks(attributes.tasks)
     changeTheme(attributes.theme)
-    showFriends(profile.data.id)
+    getFriends(profile.data.id)
 }
 
 function setPageHeading(name) {
@@ -169,14 +228,14 @@ function showProfilePicture(url) {
 }
 
 function showUserTasks(tasks) {
-
+    tasks.map(task => displayTask(task.content))
 }
 
 function showUserPosts(posts) {
-
+    posts.map(post => displayPost(post))
 }
 
-function showFriends(id) {
+function getFriends(id) {
     const friendsUrl = `http://localhost:3000/users/${id}/friends`
     fetch(friendsUrl)
         .then(resp => resp.json())
@@ -187,7 +246,7 @@ function showFriends(id) {
 function displayFriends(name) {
     const div = document.createElement('div')
     const friend = document.createElement('p')
-    friend.innerText = name.toUpperCase
+    friend.innerText = name
     div.appendChild(friend)
     friendList.appendChild(div)
 }
@@ -207,32 +266,52 @@ function changeTheme(animal) {
     postDiv.style.boxShadow = themes[animal]['boxShadow']
     themeImage.style.boxShadow = themes[animal]['boxShadow']
     postForm.style.borderTop = themes[animal]['lineColor']
+    postList.style.background = themes[animal]['poolColor']
 }
 
 appName.addEventListener('click', event => {
-    changeTheme('manatee')
-    loadAllPosts()
-})
-userLink.addEventListener('click', event => {
-    loadUserProfile(currentUser)
+    if (currentUser == {}) {
+        resetPage()
+    } else {
+        resetPageLite()
+        loadAllPosts()
+    }
 })
 
-loadAllPosts()
+// // attempted splash/bash incrementer
+// posts.addEventListener('change', event => {
+//     console.log(event.target)
+//     if (event.target.type == 'checkbox') {
+
+//     }
+// })
+
+userLink.addEventListener('click', event => {
+    const array = [currentUser.data]
+    fetchProfileData(array)
+})
 
 function loadAllPosts() {
     fetch(postsUrl)
         .then(res => res.json())
         .then(array => array.map(
-            post => displayPosts(post)))
+            post => displayPost(post)))
 }
 
-function displayPosts(post) {
+// only display post front end
+function displayPost(post) {
     const postCard = document.createElement('div')
     postCard.className = 'card'
 
     const postButtonDiv = document.createElement('div')
     postButtonDiv.className = 'post-button-div'
 
+    // const splashForm = document.createElement('form')
+    // splashForm.innerHTML = `
+    // <span name='count'>0</span>
+    // <input type='checkbox' name='splash' for='count'>
+    // <label for='splash'>Splash</label>`
+    // postButtonDiv.appendChild(splashForm)
     const content = document.createElement('p')
     styleContent(content, post)
 
@@ -242,14 +321,14 @@ function displayPosts(post) {
     const bashes = document.createElement('span')
     styleBashes(bashes, post)
 
-    const comment = document.createElement('p')
-    styleComment(comment, post)
+    // const comment = document.createElement('p')
+    // styleComment(comment, post)
 
-    const input = document.createElement('input')
-    styleCommentInput(input)
+    // const input = document.createElement('input')
+    // styleCommentInput(input)
 
-    const commentButton = document.createElement('button')
-    styleCommentButton(commentButton)
+    // const commentButton = document.createElement('button')
+    // styleCommentButton(commentButton)
 
     const splashButton = document.createElement('button')
     styleSplashButton(splashButton)
@@ -260,39 +339,47 @@ function displayPosts(post) {
     splashes.appendChild(splashButton)
     bashes.appendChild(bashButton)
     postButtonDiv.append(splashes, bashes)
-    postCard.append(content, comment, commentButton, postButtonDiv, input)
+    postCard.append(content, postButtonDiv)
     postList.appendChild(postCard)
 }
 
 function styleContent(content, post) {
-    content.innerText = post.content
+    // console.log(post)
+    if (post.anon == true) {
+        console.log('post.anon is true!')
+        content.innerText = `Anonymous Hippo: ${post.content}`
+    } else {
+        userIndex.forEach(user => {
+            if (user.id == post.user_id) {
+                content.innerText = `${user.name}: ${post.content}`
+            }
+        })
+    }
     content.className = 'post-content'
 }
 
 function styleSplashes(splashes, post) {
     splashes.innerText = post.splash
-    splashes.className = 'post-button'
 }
 
 function styleBashes(bashes, post) {
     bashes.innerText = post.crash
-    bashes.className = 'post-button'
 }
 
-function styleComment(comment, post) {
-    comment.innerText = 'comments go here'
-    comment.className = 'comment-content'
-}
+// function styleComment(comment, post) {
+//     // comment.innerText = 'comments go here'
+//     comment.className = 'comment-content'
+// }
 
-function styleCommentInput(input) {
-    input.placeholder = 'what is your immediate unfiltered reaction?'
-    input.className = 'comment-input'
-}
+// function styleCommentInput(input) {
+//     input.placeholder = 'what is your immediate unfiltered reaction?'
+//     input.className = 'comment-input'
+// }
 
-function styleCommentButton(commentButton) {
-    commentButton.innerText = 'Comment'
-    commentButton.className = 'comment-button'
-}
+// function styleCommentButton(commentButton) {
+//     commentButton.innerText = 'Comment'
+//     commentButton.className = 'comment-button'
+// }
 
 function styleSplashButton(splashButton) {
     splashButton.innerText = 'Splash'
@@ -302,21 +389,4 @@ function styleSplashButton(splashButton) {
 function styleBashButton(bashButton) {
     bashButton.innerText = 'Bash'
     bashButton.className = 'post-button'
-}
-
-loadTasks()
-
-function loadTasks() {
-    fetch(tasksUrl)
-        .then(res => res.json())
-        .then(array => array.map(
-            task => displayTasks(task)))
-}
-
-function displayTasks(task) {
-    const div = document.createElement('div')
-    const content = document.createElement('p')
-    content.innerText = task.content
-    div.appendChild(content)
-    toDoList.appendChild(div)
 }

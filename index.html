@@ -17,6 +17,8 @@
                 <div id='logCorner'>
                     <input type='text' placeholder='enter name' id='profileInput'>
                     <button id='loginButton'>Login</button>
+                    <button id='logoutButton'>Logout</button>
+                    <button id='signUpButton'>Sign Up</button>
                 </div>
             </div>
         </header>
@@ -25,20 +27,22 @@
             <form id='postForm'>
                 <input type='text' name='postInput' placeholder='How are you feeling?'>
                 <input type='submit' value='Post'>
+                <label for='anon'>anonymously?</label>
+                <input type='checkbox' name='anon' value='true'>
             </form>
             <div id='postList'></div>
         </div>
         <div id='profilePicDiv'></div>
         <div id='widgets'>
-            <div>
-                <p class='title'>To-Do List</p>
-                <form id='toDoForm'>
-                    <input type='text' name='todo' placeholder='task to dominate...'>
+            <div id='taskDiv'>
+                <p class='title'>Task List</p>
+                <form id='taskForm'>
+                    <input type='text' name='task' placeholder='task to dominate...'>
                     <input type='submit' value='Add Item'>
                 </form>
-                <ul id='toDoList'></ul>
+                <div id='taskList'></div>
             </div>
-            <div>
+            <div id='friendDiv'>
                 <p class='title'>Friend List</p>
                 <form id='friendForm'>
                     <input type='text' name='friend' placeholder='add a friend!'>
