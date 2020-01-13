@@ -17,6 +17,28 @@ header {
     box-shadow: 0 0 5px 3px silver;
 }
 
+p {
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+button {
+    font-family: 'Roboto', sans-serif;
+    border-image: none;
+    margin-left: 0.5rem;
+}
+
+form {
+    display: flex;
+    justify-content: flex-start
+}
+
+ul {
+    padding-inline-start: 1rem;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
 .container {
     height: 100vh;
     margin: 0;
@@ -26,21 +48,23 @@ header {
     grid-gap: 10px 10px;
 }
 
+#profileInput {
+    font-family: 'Roboto', sans-serif;
+    border-image: none;
+    margin-left: 0.5rem;
+    width: auto;
+}
+
+input[type="submit"] {
+    font-family: 'Roboto', sans-serif;
+    border-image: none;
+    margin-left: 0.5rem;
+}
+
 .title {
     font-size: 1.75em;
-}
-
-.widget {
-    text-shadow: 0 0 1px #37392E
-}
-
-.userCorner {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-gap: 10px;
-    grid-row: 1;
-    grid-column: 3;
-    grid-gap: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .button {
@@ -63,57 +87,29 @@ header {
     color: #37392E;
 }
 
+.userCorner {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-gap: 10px;
+    grid-row: 1;
+    grid-column: 3;
+    grid-gap: 0;
+}
+
 #userLink {
     grid-column: 1;
     padding: 7px;
-    display: grid;
-    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#logoutButton {
+#logCorner {
     grid-column: 2;
     padding: 7px;
-    display: grid;
-    justify-self: center;
-}
-
-#posts {
-    grid-row: 3;
-    grid-column: 2;
-    background: #9BD1E5;
-    padding: 1.5%;
-    box-shadow: 0 3px 4px 3px silver;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#widgets {
-    grid-row: 3;
-    grid-column: 3;
-    background: rgb(36, 137, 170);
-    box-shadow: 0 3px 4px 3px silver;
-    padding: 3%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-#themeImage {
-    grid-row: 3;
-    grid-column: 1;
-    background-image: url('https://api.time.com/wp-content/uploads/2017/03/manatee-endangered-species.jpeg');
-    background-position: 35% 45%;
-    background-size: 450%;
-    padding-left: 1%;
-    box-shadow: 0 3px 4px 3px silver;
-}
-
-#belowThemeDiv {
-    grid-row: 4;
-    grid-column: 1;
-    text-align: center;
-    padding-top: 5px;
+    flex-direction: row;
+    justify-content: space-around;
 }
 
 #pageHeading {
@@ -132,4 +128,105 @@ header {
     background-position: 0 20%;
     background-size: 100%;
     background-image: url('https://www.jakks.com/img/products/nintendo/702190.jpg');
+}
+
+#posts {
+    grid-row: 3;
+    grid-column: 2;
+    background: #9BD1E5;
+    box-shadow: 0 3px 4px 3px silver;
+    overflow: scroll;
+}
+
+.post-button {}
+
+.card {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: auto auto auto;
+    border-bottom: 1px solid grey;
+    padding: 2rem;
+    grid-gap: 0 10px;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
+.post-content {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.post-button-div {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+}
+
+.comment-content {
+    grid-row: 2;
+    grid-column: 1;
+}
+
+.comment-input {
+    grid-row: 3;
+    grid-column: 1;
+}
+
+.comment-button {
+    grid-row: 3;
+    grid-column: 2;
+}
+
+#postForm {
+    display: flex;
+    margin: 1rem;
+    margin-bottom: 0.5rem;
+    border-top: 3px solid rgb(36, 137, 170);
+    padding: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+#postList {
+    display: flex;
+    margin: 2rem;
+    margin-top: 0;
+    padding: 1rem;
+    padding-top: 0;
+    background-color: #D1FAFF;
+    flex-direction: column-reverse;
+    box-shadow: inset 0 0 5px silver;
+}
+
+#widgets {
+    grid-row: 3;
+    grid-column: 3;
+    background: rgb(36, 137, 170);
+    box-shadow: 0 3px 4px 3px silver;
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: scroll;
+}
+
+#taskList {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#themeImage {
+    grid-row: 3;
+    grid-column: 1;
+    background-image: url('https://api.time.com/wp-content/uploads/2017/03/manatee-endangered-species.jpeg');
+    background-position: 35% 45%;
+    background-size: 450%;
+    padding-left: 1%;
+    box-shadow: 0 3px 4px 3px silver;
+}
+
+#belowThemeDiv {
+    grid-row: 4;
+    grid-column: 1;
+    text-align: center;
+    padding-top: 5px;
 }

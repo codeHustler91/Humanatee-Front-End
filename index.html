@@ -10,34 +10,45 @@
 <body>
     <div class='container'>
         <header>
-            <div id='appName'>HuManatee</div>
+            <div id='appName'>HuManatee
+            </div>
             <div class='userCorner'>
                 <div id='userLink'>Profile</div>
-                <div id='logoutButton'>Log Out</div>
+                <div id='logCorner'>
+                    <input type='text' placeholder='enter name' id='profileInput'>
+                    <button id='loginButton'>Login</button>
+                    <button id='logoutButton'>Logout</button>
+                </div>
             </div>
         </header>
-        <div id='pageHeading' class='title'>User Posts</div>
+        <div id='pageHeading' class='title'>Communitee Pool</div>
         <div id='posts'>
             <form id='postForm'>
                 <input type='text' name='postInput' placeholder='How are you feeling?'>
                 <input type='submit' value='Post'>
+                <label for='anon'>anonymously?</label>
+                <input type='checkbox' name='anon' value='true'>
             </form>
-            <ul id='postList'></ul>
+            <div id='postList'></div>
         </div>
         <div id='profilePicDiv'></div>
-        <div id='widgets' class='widget'>
-            <div class='title'>To-Do List</div>
-            <form id='toDoForm'>
-                <input type='text' name='todo' placeholder='task to dominate...'>
-                <input type='submit' value='Add Item'>
-            </form>
-            <ul id='toDoList'></ul>
-            <div class='title'>Friends</div>
-            <form id='friendForm'>
-                <input type='text' name='friends' placeholder='Add Friends...'>
-                <input type='submit' value='Add Friend'>
-            </form>
-            <ul id='friendList'></ul>
+        <div id='widgets'>
+            <div id='taskDiv'>
+                <p class='title'>Task List</p>
+                <form id='taskForm'>
+                    <input type='text' name='task' placeholder='task to dominate...'>
+                    <input type='submit' value='Add Item'>
+                </form>
+                <div id='taskList'></div>
+            </div>
+            <div id='friendDiv'>
+                <p class='title'>Friend List</p>
+                <form id='friendForm'>
+                    <input type='text' name='friend' placeholder='add a friend!'>
+                    <input type='submit' value='Add Buddy'>
+                </form>
+                <div id='friendList'></div>
+            </div>
         </div>
         <div id='themeImage'></div>
         <div id='belowThemeDiv'>
