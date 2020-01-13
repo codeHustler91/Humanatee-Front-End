@@ -217,7 +217,7 @@ input[type="submit"] {
 #themeImage {
     grid-row: 3;
     grid-column: 1;
-    background-image: url('https://timedotcom.files.wordpress.com/2017/03/manatee-endangered-species.jpeg');
+    background-image: url('https://api.time.com/wp-content/uploads/2017/03/manatee-endangered-species.jpeg');
     background-position: 35% 45%;
     background-size: 450%;
     padding-left: 1%;

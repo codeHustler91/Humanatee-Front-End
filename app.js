@@ -148,7 +148,7 @@ function postThePost(post) {
 
 const themes = {
     manatee: {
-        url: "url('https://timedotcom.files.wordpress.com/2017/03/manatee-endangered-species.jpeg')",
+        url: "url('https://api.time.com/wp-content/uploads/2017/03/manatee-endangered-species.jpeg')",
         backgroundSize: '450%',
         backgroundPosition: '35% 45%',
         headerColor: '#28AFB0',
