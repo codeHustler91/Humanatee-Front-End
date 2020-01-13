@@ -409,3 +409,5 @@ function styleBashButton(bashButton, post) {
     bashButton.innerText = post.crash
     bashButton.className = 'post-button'
 }
+
+// save damnit!
