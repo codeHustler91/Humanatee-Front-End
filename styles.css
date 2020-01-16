@@ -26,6 +26,9 @@ button {
     font-family: 'Roboto', sans-serif;
     border-image: none;
     margin-left: 0.5rem;
+    border: none;
+    border-radius: 2px;
+    padding: 3px;
 }
 
 form {
@@ -53,12 +56,27 @@ ul {
     border-image: none;
     margin-left: 0.5rem;
     width: auto;
+    height: 60%;
+}
+
+#loginButton {
+    height: 80%;
+    border: none;
+    border-radius: 2px;
+    padding: 3px;
 }
 
 input[type="submit"] {
     font-family: 'Roboto', sans-serif;
     border-image: none;
     margin-left: 0.5rem;
+    padding: 3px;
+    border-radius: 2px;
+}
+input {
+    border-radius: 2px;
+    border: none;
+    padding: 3px;
 }
 
 .title {
