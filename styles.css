@@ -65,6 +65,9 @@ ul {
     border-radius: 2px;
     padding: 3px;
 }
+#logoutButton {
+    height: 80%;
+}
 
 input[type="submit"] {
     font-family: 'Roboto', sans-serif;
@@ -103,6 +106,7 @@ input {
     font-family: 'Fascinate', cursive;
     font-size: 30px;
     color: #37392E;
+    cursor: pointer;
 }
 
 .userCorner {
@@ -120,6 +124,7 @@ input {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 #logCorner {
@@ -156,7 +161,9 @@ input {
     overflow: scroll;
 }
 
-.post-button {}
+.post-button {
+    background-color: rgb(206, 205, 205);
+}
 
 .card {
     display: grid;
