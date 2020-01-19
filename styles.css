@@ -12,7 +12,6 @@ header {
     grid-column: 1/-1;
     background: #28AFB0;
     display: grid;
-    grid-gap: 0;
     grid-template-columns: 25% 50% 25%;
     box-shadow: 0 0 5px 3px silver;
 }
@@ -102,7 +101,6 @@ input {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3px;
     font-family: 'Fascinate', cursive;
     font-size: 30px;
     color: #37392E;
@@ -148,6 +146,7 @@ input {
 #profilePicDiv {
     grid-row: 2;
     grid-column: 3;
+    border-radius: 3px;
     background-position: 0 20%;
     background-size: 100%;
     background-image: url('https://www.jakks.com/img/products/nintendo/702190.jpg');
@@ -156,6 +155,7 @@ input {
 #posts {
     grid-row: 3;
     grid-column: 2;
+    border-radius: 3px;
     background: #9BD1E5;
     box-shadow: 0 3px 4px 3px silver;
     overflow: scroll;
@@ -228,6 +228,7 @@ input {
     background: rgb(36, 137, 170);
     box-shadow: 0 3px 4px 3px silver;
     padding: 5%;
+    border-radius: 3px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -242,10 +243,10 @@ input {
 #themeImage {
     grid-row: 3;
     grid-column: 1;
+    border-radius: 3px;
     background-image: url('https://api.time.com/wp-content/uploads/2017/03/manatee-endangered-species.jpeg');
     background-position: 35% 45%;
     background-size: 450%;
-    padding-left: 1%;
     box-shadow: 0 3px 4px 3px silver;
 }
 
