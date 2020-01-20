@@ -12,7 +12,7 @@ header {
     grid-column: 1/-1;
     background: #28AFB0;
     display: grid;
-    grid-template-columns: 25% 50% 25%;
+    grid-template-columns: 25% 75%;
     box-shadow: 0 0 5px 3px silver;
 }
 
@@ -24,10 +24,9 @@ p {
 button {
     font-family: 'Roboto', sans-serif;
     border-image: none;
-    margin-left: 0.5rem;
+    margin: 0 0.25rem;
     border: none;
     border-radius: 2px;
-    padding: 3px;
 }
 
 form {
@@ -53,26 +52,23 @@ ul {
 #profileInput {
     font-family: 'Roboto', sans-serif;
     border-image: none;
-    margin-left: 0.5rem;
-    width: auto;
+    margin: 0 0.25rem;
     height: 60%;
 }
 
 #loginButton {
-    height: 80%;
+    height: 70%;
     border: none;
     border-radius: 2px;
-    padding: 3px;
 }
 #logoutButton {
-    height: 80%;
+    height: 70%;
 }
 
 input[type="submit"] {
     font-family: 'Roboto', sans-serif;
     border-image: none;
-    margin-left: 0.5rem;
-    padding: 3px;
+    margin: 0 0.5rem;
     border-radius: 2px;
 }
 input {
@@ -108,29 +104,17 @@ input {
 }
 
 .userCorner {
-    display: grid;
-    grid-template-columns: 30% 70%;
-    grid-gap: 10px;
-    grid-row: 1;
-    grid-column: 3;
-    grid-gap: 0;
+    grid-column: 2 / 3;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 #userLink {
     grid-column: 1;
     padding: 7px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-right: 1rem;
     cursor: pointer;
-}
-
-#logCorner {
-    grid-column: 2;
-    padding: 7px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
 }
 
 #pageHeading {
