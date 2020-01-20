@@ -27,6 +27,7 @@ button {
     margin: 0 0.25rem;
     border: none;
     border-radius: 2px;
+    cursor: pointer;
 }
 
 form {
@@ -53,7 +54,7 @@ ul {
     font-family: 'Roboto', sans-serif;
     border-image: none;
     margin: 0 0.25rem;
-    height: 60%;
+    height: 55%;
 }
 
 #loginButton {
@@ -75,6 +76,7 @@ input {
     border-radius: 2px;
     border: none;
     padding: 3px;
+    cursor: pointer;
 }
 
 .title {
