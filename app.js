@@ -1,4 +1,3 @@
-//work it
 const widgets = document.querySelector('#widgets')
 const taskForm = document.querySelector('#taskForm')
 const taskList = document.querySelector('#taskList')
@@ -57,7 +56,7 @@ function resetPageLite() {
     }
 }
 
-// adding new tasks with trash option
+// adding new tasks
 taskForm.addEventListener('submit', event => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -66,7 +65,7 @@ taskForm.addEventListener('submit', event => {
     postTask(task)
     event.target.reset()
 })
-
+// adding new friends (optimistic rendering only)
 friendForm.addEventListener('submit', event => {
     event.preventDefault()
     const formData = new FormData(event.target)
@@ -97,7 +96,6 @@ function postTask(task) {
         content: task,
         user_id: currentUser.data.id
     }
-    console.log(taskObject)
     fetch(tasksUrl, {
         method: 'POST',
         body: JSON.stringify(taskObject),
