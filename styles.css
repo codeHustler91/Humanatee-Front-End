@@ -147,30 +147,32 @@ input {
     overflow: scroll;
 }
 
-.post-button {
-    background-color: rgb(206, 205, 205);
-}
-
 .card {
-    display: grid;
-    grid-template-columns: 80% 20%;
-    grid-template-rows: auto auto auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid grey;
-    padding: 2rem;
-    grid-gap: 0 10px;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    padding: 0.5rem 0.25rem 0.5rem 0.75rem;
 }
-
 .post-content {
     grid-row: 1;
     grid-column: 1;
 }
-
-.post-button-div {
-    grid-row: 1;
-    grid-column: 2;
+.post-button-container {
     display: flex;
+    border-left: 1px solid rgba(128, 128, 128, 0.363);
+
+}
+span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem;
+}
+.post-button {
+    background-color: rgb(206, 205, 205);
+    width: auto;
+    height: auto;
 }
 
 .comment-content {

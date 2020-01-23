@@ -130,12 +130,12 @@ postForm.addEventListener('submit', event => {
     postThePost(postObject)
 })
 // optimistically rendering post
-function displayPost(post) {
+function displayPost(post, comments = []) {
     const postCard = document.createElement('div')
     postCard.className = 'card'
 
-    const postButtonDiv = document.createElement('div')
-    postButtonDiv.className = 'post-button-div'
+    const postButtonContainer = document.createElement('div')
+    postButtonContainer.className = 'post-button-container'
 
     const content = document.createElement('p')
     styleContent(content, post)
@@ -150,19 +150,12 @@ function displayPost(post) {
     const bashButton = document.createElement('button')
     styleBashButton(bashButton, post)
 
-    // const comment = document.createElement('p')
-    // styleComment(comment, post)
-
-    // const input = document.createElement('input')
-    // styleCommentInput(input)
-
-    // const commentButton = document.createElement('button')
-    // styleCommentButton(commentButton)
+    displayComments(comments, postCard)
 
     splashes.appendChild(splashButton)
     bashes.appendChild(bashButton)
-    postButtonDiv.append(splashes, bashes)
-    postCard.append(content, postButtonDiv)
+    postButtonContainer.append(splashes, bashes)
+    postCard.append(content, postButtonContainer)
     postList.appendChild(postCard)
 }
 function postThePost(post) {
@@ -170,6 +163,19 @@ function postThePost(post) {
         method: 'POST',
         body: JSON.stringify(post),
         headers: { 'Content-Type': 'application/json' }
+    })
+}
+function displayComments(comments, card) {
+    comments.forEach(comment => {
+        const content = document.createElement('p')
+        content.innerText = comment.content
+    
+        card.append(content)
+        // const input = document.createElement('input')
+        // styleCommentInput(input)
+    
+        // const commentButton = document.createElement('button')
+        // styleCommentButton(commentButton)
     })
 }
 // theme control center
@@ -266,7 +272,7 @@ function displayProfileData(profile) {
     resetPage()
     setPageHeading(attributes.name)
     showProfilePicture(attributes.picture)
-    showUserPosts(attributes.posts)
+    showUserPosts(attributes.posts, attributes.comments)
     showUserTasks(attributes.tasks)
     changeTheme(attributes.theme)
     getFriends(profile.data.id)
@@ -278,8 +284,11 @@ function showProfilePicture(url) {
     const urlString = `url('${url}')`
     profilePicDiv.style.backgroundImage = urlString
 }
-function showUserPosts(posts) {
-    posts.map(post => displayPost(post))
+function showUserPosts(posts, comments) {
+    posts.map(post => {
+        const postComments = comments.filter(comment => comment.post_id === post.id)
+        displayPost(post, postComments)
+    })
 }
 function showUserTasks(tasks) {
     tasks.map(task => displayTask(task.content))
@@ -310,15 +319,22 @@ appName.addEventListener('click', event => {
         resetPage()
     } else {
         resetPageLite()
-        loadAllPosts()
+        loadAllComments()
     }
 })
-function loadAllPosts() {
+function loadAllPosts(comments) {
+    console.log(comments)
     fetch(postsUrl)
         .then(res => res.json())
-        .then(array => array.map(
-            post => displayPost(post)
-        ))
+        .then(array => array.forEach(post => {
+            const postComments = comments.filter(comment => comment.post_id === post.id)
+            displayPost(post, postComments)
+        }))
+}
+function loadAllComments() {
+    fetch(commentsUrl)
+        .then(res => res.json())
+        .then(loadAllPosts)
 }
 
 // splash/bash incrementer (optimistically rendered)
