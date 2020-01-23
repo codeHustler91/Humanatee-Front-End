@@ -1,25 +1,25 @@
+const body = document.querySelector('body')
+const header = document.querySelector('header')
+const appNameDiv = document.querySelector('#appName')
+const appName = document.querySelector('#appName')
+const logCorner = document.querySelector('#logCorner')
+const loginButton = document.querySelector('#loginButton')
+const logoutButton = document.querySelector('#logoutButton')
+const profileInput = document.querySelector('#profileInput')
+const userLink = document.querySelector('#userLink')
+const pageHeading = document.querySelector('#pageHeading')
+const profilePicDiv = document.querySelector('#profilePicDiv')
+const profileImage = document.querySelector('#profileImage')
+const themeImage = document.querySelector('#themeImage')
+const postDiv = document.querySelector('#posts')
+const postForm = document.querySelector('#postForm')
+const postList = document.querySelector('#postList')
 const widgets = document.querySelector('#widgets')
 const taskForm = document.querySelector('#taskForm')
 const taskList = document.querySelector('#taskList')
-const postForm = document.querySelector('#postForm')
 const friendForm = document.querySelector('#friendForm')
-const postList = document.querySelector('#postList')
-const postDiv = document.querySelector('#posts')
-const profilePicDiv = document.querySelector('#profilePicDiv')
-const profileImageForm = document.querySelector('#profileImageForm')
-const profileImage = document.querySelector('#profileImage')
-const themeImage = document.querySelector('#themeImage')
-const themeSelect = document.querySelector('#themeSelect')
-const header = document.querySelector('header')
-const body = document.querySelector('body')
-const appNameDiv = document.querySelector('#appName')
-const loginButton = document.querySelector('#loginButton')
-const logCorner = document.querySelector('#logCorner')
-const profileInput = document.querySelector('#profileInput')
-const pageHeading = document.querySelector('#pageHeading')
-const appName = document.querySelector('#appName')
-const userLink = document.querySelector('#userLink')
 const friendList = document.querySelector('#friendList')
+const themeSelect = document.querySelector('#themeSelect')
 
 const communiteePage = 'http://localhost:3000/'
 const usersUrl = 'http://localhost:3000/users'
@@ -30,10 +30,12 @@ const commentsUrl = 'http://localhost:3000/comments'
 let userIndex = {}
 let currentUser = {}
 
+
 function logout() {
     currentUser = {}
     resetPage()
 }
+logoutButton.addEventListener('click', logout)
 
 function resetPage() {
     changeTheme('manatee')
@@ -122,35 +124,27 @@ postForm.addEventListener('submit', event => {
         splash: 0,
         content: postContent
     }
-    // *back end = crash, front end = bash*
+    // * back end = crash, front end = bash *
     event.target.reset()
     displayPost(postObject)
     postThePost(postObject)
 })
 // optimistically rendering post
 function displayPost(post) {
-    console.log('display post function firing')
     const postCard = document.createElement('div')
     postCard.className = 'card'
 
     const postButtonDiv = document.createElement('div')
     postButtonDiv.className = 'post-button-div'
 
-    // const splashForm = document.createElement('form')
-    // splashForm.innerHTML = `
-    // <span name='count'>0</span>
-    // <input type='checkbox' name='splash' for='count'>
-    // <label for='splash'>Splash</label>`
-    // postButtonDiv.appendChild(splashForm)
-
     const content = document.createElement('p')
     styleContent(content, post)
-    // splashes
+
     const splashes = document.createElement('span')
     styleSplashes(splashes)
     const splashButton = document.createElement('button')
     styleSplashButton(splashButton, post)
-    // bashes
+
     const bashes = document.createElement('span')
     styleBashes(bashes)
     const bashButton = document.createElement('button')
@@ -349,17 +343,23 @@ function styleContent(content, post) {
             }
         })
     }
-    content.className = 'post-content'
 }
 
+// post styling
 function styleSplashes(splashes) {
     splashes.innerText = 'Splash'
 }
-
 function styleBashes(bashes) {
     bashes.innerText = 'Bash'
 }
-
+function styleSplashButton(splashButton, post) {
+    splashButton.innerText = post.splash
+    splashButton.className = 'post-button'
+}
+function styleBashButton(bashButton, post) {
+    bashButton.innerText = post.crash
+    bashButton.className = 'post-button'
+}
 // function styleComment(comment, post) {
 //     // comment.innerText = 'comments go here'
 //     comment.className = 'comment-content'
@@ -374,13 +374,3 @@ function styleBashes(bashes) {
 //     commentButton.innerText = 'Comment'
 //     commentButton.className = 'comment-button'
 // }
-
-function styleSplashButton(splashButton, post) {
-    splashButton.innerText = post.splash
-    splashButton.className = 'post-button'
-}
-
-function styleBashButton(bashButton, post) {
-    bashButton.innerText = post.crash
-    bashButton.className = 'post-button'
-}
