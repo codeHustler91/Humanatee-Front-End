@@ -173,7 +173,9 @@ function displayComments(comments, container) {
     const ul = document.createElement('ul')
     const commentButton = document.createElement('button')
     commentButton.innerText = 'Comment?'
-    commentButton.addEventListener('click', addComment)
+    commentButton.addEventListener('click', function() {
+        addComment(ul, commentButton)
+    })
     container.append(ul, commentButton)
     comments.forEach(comment => {
         const content = document.createElement('li')
@@ -181,8 +183,16 @@ function displayComments(comments, container) {
         ul.append(content)
     })
 }
-function addComment() {
-    console.log('comment button pushed!!!!')
+function addComment(ul, button) {
+    // if (button.innerText === 'Submit') {
+
+    // }
+    const textInput = document.createElement('input')
+    button.innerText = 'Submit'
+
+    // const li = document.createElement('li')
+    // li.innerText = 'clicked comment button!'
+    ul.append(textInput)
 }
 // theme control center
 const themes = {

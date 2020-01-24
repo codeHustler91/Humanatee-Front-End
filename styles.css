@@ -85,6 +85,9 @@ input {
     padding: 3px;
     cursor: pointer;
 }
+ul input {
+    border: 1px solid rgb(206, 205, 205);
+}
 
 .title {
     font-size: 1.75em;
