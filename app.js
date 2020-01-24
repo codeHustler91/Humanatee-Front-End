@@ -134,6 +134,9 @@ function displayPost(post, comments = []) {
     const postCard = document.createElement('div')
     postCard.className = 'card'
 
+    const contentContainer = document.createElement('div')
+    contentContainer.className = 'content'
+
     const postButtonContainer = document.createElement('div')
     postButtonContainer.className = 'post-button-container'
 
@@ -150,12 +153,13 @@ function displayPost(post, comments = []) {
     const bashButton = document.createElement('button')
     styleBashButton(bashButton, post)
 
-    displayComments(comments, postCard)
+    displayComments(comments, contentContainer)
 
     splashes.appendChild(splashButton)
     bashes.appendChild(bashButton)
     postButtonContainer.append(splashes, bashes)
-    postCard.append(content, postButtonContainer)
+    contentContainer.appendChild(content)
+    postCard.append(contentContainer, postButtonContainer)
     postList.appendChild(postCard)
 }
 function postThePost(post) {
@@ -165,18 +169,20 @@ function postThePost(post) {
         headers: { 'Content-Type': 'application/json' }
     })
 }
-function displayComments(comments, card) {
+function displayComments(comments, container) {
+    const ul = document.createElement('ul')
+    const commentButton = document.createElement('button')
+    commentButton.innerText = 'Comment?'
+    commentButton.addEventListener('click', addComment)
+    container.append(ul, commentButton)
     comments.forEach(comment => {
-        const content = document.createElement('p')
+        const content = document.createElement('li')
         content.innerText = comment.content
-    
-        card.append(content)
-        // const input = document.createElement('input')
-        // styleCommentInput(input)
-    
-        // const commentButton = document.createElement('button')
-        // styleCommentButton(commentButton)
+        ul.append(content)
     })
+}
+function addComment() {
+    console.log('comment button pushed!!!!')
 }
 // theme control center
 const themes = {
@@ -323,7 +329,6 @@ appName.addEventListener('click', event => {
     }
 })
 function loadAllPosts(comments) {
-    console.log(comments)
     fetch(postsUrl)
         .then(res => res.json())
         .then(array => array.forEach(post => {
@@ -376,17 +381,3 @@ function styleBashButton(bashButton, post) {
     bashButton.innerText = post.crash
     bashButton.className = 'post-button'
 }
-// function styleComment(comment, post) {
-//     // comment.innerText = 'comments go here'
-//     comment.className = 'comment-content'
-// }
-
-// function styleCommentInput(input) {
-//     input.placeholder = 'what is your immediate unfiltered reaction?'
-//     input.className = 'comment-input'
-// }
-
-// function styleCommentButton(commentButton) {
-//     commentButton.innerText = 'Comment'
-//     commentButton.className = 'comment-button'
-// }
