@@ -171,6 +171,7 @@ function postThePost(post) {
 }
 function displayComments(comments, container) {
     const ul = document.createElement('ul')
+    // break into function elsewhere
     const form = document.createElement('form')
     const text = document.createElement('input')
     const send = document.createElement('input')
@@ -188,6 +189,7 @@ function displayComments(comments, container) {
         const commentContent = formData.get('commentInput')
         event.target.reset()
         console.log(commentContent, formData)
+        // functions to render on dom and post to back end
     })
 
     container.append(ul, form)
@@ -198,14 +200,8 @@ function displayComments(comments, container) {
     })
 }
 function addComment(ul, button) {
-    // if (button.innerText === 'Submit') {
-
-    // }
     const textInput = document.createElement('input')
     button.innerText = 'Submit'
-
-    // const li = document.createElement('li')
-    // li.innerText = 'clicked comment button!'
     ul.append(textInput)
 }
 // theme control center
