@@ -171,12 +171,26 @@ function postThePost(post) {
 }
 function displayComments(comments, container) {
     const ul = document.createElement('ul')
-    const commentButton = document.createElement('button')
-    commentButton.innerText = 'Comment?'
-    commentButton.addEventListener('click', function() {
-        addComment(ul, commentButton)
+    const form = document.createElement('form')
+    const text = document.createElement('input')
+    const send = document.createElement('input')
+    form.className = 'commentForm'
+    text.type = 'text'
+    text.name = 'commentInput'
+    text.placeholder = 'want to respond?'
+    send.type = 'submit'
+    send.value = 'Send'
+    form.append(text, send)
+
+    form.addEventListener('submit', event => {
+        event.preventDefault()
+        const formData = new FormData(event.target)
+        const commentContent = formData.get('commentInput')
+        event.target.reset()
+        console.log(commentContent, formData)
     })
-    container.append(ul, commentButton)
+
+    container.append(ul, form)
     comments.forEach(comment => {
         const content = document.createElement('li')
         content.innerText = comment.content
