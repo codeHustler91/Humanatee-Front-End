@@ -41,6 +41,12 @@ form {
     display: flex;
     justify-content: flex-start
 }
+form input[type='text'] {
+    border: 1px solid rgba(128, 128, 128, 0.363)
+}
+.commentForm {
+    order: 3;
+}
 
 ul {
     order: 2;

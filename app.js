@@ -94,13 +94,7 @@ function postTask(task) {
         content: task,
         user_id: currentUser.data.id
     }
-    fetch(tasksUrl, {
-        method: 'POST',
-        body: JSON.stringify(taskObject),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+    postToBack(tasksUrl, taskObject)
 }
 
 // adds event delegation for trash class WIDGET
@@ -127,7 +121,7 @@ postForm.addEventListener('submit', event => {
     // * back end = crash, front end = bash *
     event.target.reset()
     displayPost(postObject)
-    postThePost(postObject)
+    postToBack(postsUrl, postObject)
 })
 // optimistically rendering post
 function displayPost(post, comments = []) {
@@ -162,47 +156,47 @@ function displayPost(post, comments = []) {
     postCard.append(contentContainer, postButtonContainer)
     postList.appendChild(postCard)
 }
-function postThePost(post) {
-    fetch(postsUrl, {
+function postToBack(url, data) {
+    fetch(url, {
         method: 'POST',
-        body: JSON.stringify(post),
+        body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' }
     })
 }
 function displayComments(comments, container) {
     const ul = document.createElement('ul')
-    // break into function elsewhere
     const form = document.createElement('form')
     const text = document.createElement('input')
     const send = document.createElement('input')
-    form.className = 'commentForm'
+    // break into function elsewhere, start
     text.type = 'text'
     text.name = 'commentInput'
     text.placeholder = 'want to respond?'
     send.type = 'submit'
     send.value = 'Send'
+    // end of stuff, but also do form
+    form.className = 'commentForm'
     form.append(text, send)
 
     form.addEventListener('submit', event => {
         event.preventDefault()
         const formData = new FormData(event.target)
         const commentContent = formData.get('commentInput')
+        renderListItem(ul, commentContent)
         event.target.reset()
-        console.log(commentContent, formData)
-        // functions to render on dom and post to back end
+        // const commentObject = {
+        //     content: commentContent,
+        //     post_id: 
+        // }
+        // postToBack(commentsUrl, commentObject)
     })
-
     container.append(ul, form)
-    comments.forEach(comment => {
-        const content = document.createElement('li')
-        content.innerText = comment.content
-        ul.append(content)
-    })
+    comments.forEach(comment => renderListItem(ul, comment.content))
 }
-function addComment(ul, button) {
-    const textInput = document.createElement('input')
-    button.innerText = 'Submit'
-    ul.append(textInput)
+function renderListItem(ul, content) {
+    const li = document.createElement('li')
+    li.textContent = content
+    ul.appendChild(li)
 }
 // theme control center
 const themes = {
@@ -311,7 +305,7 @@ function showProfilePicture(url) {
     profilePicDiv.style.backgroundImage = urlString
 }
 function showUserPosts(posts, comments) {
-    posts.map(post => {
+    posts.forEach(post => {
         const postComments = comments.filter(comment => comment.post_id === post.id)
         displayPost(post, postComments)
     })
