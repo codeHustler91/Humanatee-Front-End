@@ -184,11 +184,6 @@ function displayComments(comments, container) {
         const commentContent = formData.get('commentInput')
         renderListItem(ul, commentContent)
         event.target.reset()
-        // const commentObject = {
-        //     content: commentContent,
-        //     post_id: 
-        // }
-        // postToBack(commentsUrl, commentObject)
     })
     container.append(ul, form)
     comments.forEach(comment => renderListItem(ul, comment.content))
