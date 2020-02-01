@@ -9,9 +9,11 @@ Thanks for visiting!
 ## Features of the website
 
 ### Overview
-* Login, post your thoughts, read other animal's posts, and splash(like) and/or bash(dislike) them as you please!
+* Login and express your thoughts
 
 ![Make Post](./assets/makePost.gif)
+
+* Comment on other animal's posts, and splash(like) and/or bash(dislike) them as you please!
 
 ![View Post](./assets/viewPost.gif)
 
